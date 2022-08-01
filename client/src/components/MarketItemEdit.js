@@ -2,21 +2,11 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const MarketItemEdit = (props) => {
-  const initialState = {
-    name: "",
-    categories: "",
-    image: "",
-    description: "",
-    price: 0,
-    deliverable: false,
-    location: "",
-  };
-
-  const [fields, setFields] = useState(initialState);
   const { itemID } = useParams();
   const editedItem = props.marketplace.find((item) => {
     return itemID === item._id;
   });
+  const [fields, setFields] = useState(editedItem);
 
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
@@ -43,7 +33,7 @@ const MarketItemEdit = (props) => {
           <input
             name="name"
             type="text"
-            value={fields.name ? fields.name : editedItem.name}
+            value={fields.name}
             onChange={handleChange}
             required
           />
@@ -54,9 +44,7 @@ const MarketItemEdit = (props) => {
             name="categories"
             type="text"
             onChange={handleChange}
-            value={
-              fields.categories ? fields.categories : editedItem.categories
-            }
+            value={fields.categories}
           />
         </div>
         <div>
