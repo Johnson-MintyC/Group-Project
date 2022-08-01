@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Marketitem from "./components/Marketitem";
 import MarketItemEdit from "./components/MarketItemEdit";
 import Marketplace from "./components/Marketplace";
+import NewItemForm from "./components/NewItemForm";
 
 function App() {
   const [marketplace, setMarketplace] = useState(null);
@@ -20,6 +21,20 @@ function App() {
     makeApiCall();
   }, []);
 
+  const handleCreate = async (fields) => {
+    const url = "http://localhost:3500/marketplace";
+    const res = await fetch("http://localhost:3500/marketplace", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(fields),
+    });
+    const newItem = await res.json();
+    setMarketplace([...marketplace, newItem]);
+    navigate("/marketplace");
+  };
+
   const handleDelete = async (id) => {
     const deleteURL = `http://localhost:3500/marketplace/${id}`;
     const res = await fetch(deleteURL, {
@@ -36,18 +51,21 @@ function App() {
 
   const handleEdit = async (id, fields, index) => {
     const editURL = `http://localhost:3500/marketplace/${id}`;
+
     const res = await fetch(editURL, {
       method: "PUT",
-      header: `Content-Type: application/json`,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fields),
     });
     const editedItem = await res.json();
+    console.log(fields);
+    console.log(editedItem);
     setMarketplace([
       ...marketplace.slice(0, index),
       editedItem,
       ...marketplace.slice(index + 1),
     ]);
-    navigate("/marketplace");
+    navigate(`/marketplace/${id}`);
   };
 
   return (
@@ -79,7 +97,10 @@ function App() {
               />
             }
           />
-          <Route path="/newItem" />
+          <Route
+            path="/marketplace/newitem"
+            element={<NewItemForm handleCreate={handleCreate} />}
+          />
           <Route path="/profile" />
         </Routes>
       ) : (
