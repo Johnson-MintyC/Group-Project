@@ -43,7 +43,7 @@ const MarketItemEdit = (props) => {
           <input
             name="name"
             type="text"
-            value={fields.name}
+            value={fields.name ? fields.name : editedItem.name}
             onChange={handleChange}
             required
           />
@@ -54,7 +54,9 @@ const MarketItemEdit = (props) => {
             name="categories"
             type="text"
             onChange={handleChange}
-            value={fields.categories}
+            value={
+              fields.categories ? fields.categories : editedItem.categories
+            }
           />
         </div>
         <div>

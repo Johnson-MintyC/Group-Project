@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 const Marketitem = (props) => {
   const { itemID } = useParams();
@@ -14,20 +15,20 @@ const Marketitem = (props) => {
       <img src={Item.image} />
       <p>{Item.description}</p>
       <div>
-        <button
+        <Button
           onClick={() => {
             navigate(`/marketplace/${itemID}/edit`);
           }}
         >
           Edit
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             props.handleDelete(itemID);
           }}
         >
           Delete
-        </button>
+        </Button>
       </div>
     </div>
   );

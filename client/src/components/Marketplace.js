@@ -15,7 +15,12 @@ const Marketplace = (props) => {
   const MarketplaceList = props.marketplace.map((item) => {
     return <Marketitem key={item._id} item={item} />;
   });
-  return <div>{MarketplaceList}</div>;
+  return (
+    <div>
+      <Link to="/marketplace/newitem">Add</Link>
+      <div>{MarketplaceList}</div>
+    </div>
+  );
 };
 
 export default Marketplace;
