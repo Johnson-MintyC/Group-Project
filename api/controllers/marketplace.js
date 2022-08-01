@@ -4,7 +4,7 @@ const marketplaceRouter = express.Router();
 const Marketplace = require("../models/marketplace.js");
 
 //Index
-marketplaceRouter.get("", async (req, res) => {
+marketplaceRouter.get("/", async (req, res) => {
   const marketitems = await Marketplace.find({}).exec();
   res.status(200).json(marketitems);
 });
@@ -16,7 +16,7 @@ marketplaceRouter.get("/:marketItemID", async (req, res) => {
 });
 
 //Create
-marketplaceRouter.post("", async (req, res) => {
+marketplaceRouter.post("/", async (req, res) => {
   const newMarketitem = await Marketplace.create(req.body);
   res.status(200).json(newMarketitem);
 });

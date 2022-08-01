@@ -18,21 +18,20 @@ const marketplaceController = require("./controllers/marketplace.js");
 //  Middlewares
 //////////////////////////
 
-// const whitelist = ["http://localhost:3500"];
-// app.use(
-//   cors({
-//     origin: (origin, cb) => {
-//       if (whitelist.indexOf(origin) !== -1) {
-//         cb(null, true);
-//       } else {
-//         cb(new Error());
-//       }
-//     },
-//   })
-// );
+const whitelist = ["http://localhost:3501"];
+app.use(
+  cors({
+    origin: (origin, cb) => {
+      if (whitelist.indexOf(origin) !== -1) {
+        cb(null, true);
+      } else {
+        cb(new Error());
+      }
+    },
+  })
+);
 
-// convert HTML forms to js objects
-// app.use(express.json());
+app.use(express.json());
 
 /////////////////////
 //  Controllers
