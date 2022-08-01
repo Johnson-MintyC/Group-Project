@@ -1,11 +1,44 @@
 const express = require("express");
 
 const marketplaceRouter = express.Router();
-// const Marketplace = require("../models/marketplace.js");
+const Marketplace = require("../models/marketplace.js");
 
 //Index
-marketplaceRouter.get("/", (req, res) => {
-  res.send("Whatever");
+marketplaceRouter.get("", async (req, res) => {
+  const marketitems = await Marketplace.find({}).exec();
+  res.status(200).json(marketitems);
+});
+
+//Show
+marketplaceRouter.get("/:marketItemID", async (req, res) => {
+  const Marketitem = await Marketplace.findById(req.params.marketItemID).exec();
+  res.status(200).json();
+});
+
+//Create
+marketplaceRouter.post("", async (req, res) => {
+  const newMarketitem = await Marketplace.create(req.body);
+  res.status(200).json(newMarketitem);
+});
+
+//PUT
+marketplaceRouter.put("/:id", async (req, res) => {
+  const updatedMarketitem = await Marketplace.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  ).exec();
+  res.status(200).send(updatedMarketitem);
+});
+
+//Delete
+marketplaceRouter.delete("/:id", async (req, res) => {
+  const deletedMarketitem = await Marketplace.findByIdAndRemove(
+    req.params.id
+  ).exec();
+  res.status(200).send(deletedMarketitem);
 });
 
 module.exports = marketplaceRouter;
