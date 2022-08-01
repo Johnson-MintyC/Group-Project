@@ -6,7 +6,7 @@
     "mongoose": "^6.5.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "server.js"
   },
   "name": "api",
   "version": "1.0.0",
