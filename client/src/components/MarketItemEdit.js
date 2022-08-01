@@ -27,11 +27,11 @@ const MarketItemEdit = (props) => {
   };
 
   const handleSubmit = (event) => {
-    const index = props.marketplace.findIndex(editedItem);
+    const index = props.marketplace.indexOf(editedItem);
     event.preventDefault();
     // props.setMarketplace(fields);
-    props.handleEdit(fields, itemID, index);
-    console.log(fields, itemID, index);
+    props.handleEdit(itemID, fields, index);
+    // console.log(itemID, fields, index);
     // setFields(initialState);
   };
   return (
