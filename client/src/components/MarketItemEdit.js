@@ -15,8 +15,6 @@ const MarketItemEdit = (props) => {
     const validateData = () => {
       if (event.target.type === "checkbox") {
         return { ...fields, [name]: event.target.checked };
-      } else if (event.target.file) {
-        return { ...fields, [name]: files[0] };
       } else {
         return { ...fields, [name]: value };
       }
@@ -30,16 +28,12 @@ const MarketItemEdit = (props) => {
   const handleSubmit = async (event) => {
     const index = props.marketplace.indexOf(editedItem);
     event.preventDefault();
-    // props.setMarketplace(fields);
-    // props.handleEdit(itemID, fields, index);
-    // console.log(itemID, fields, index);
-    // setFields(initialState);
     const formData = new FormData();
 
     formData.append("photo", photo);
-    for (let f in fields) {
-      formData.append(f, fields[f]);
-    }
+    // for (let f in fields) {
+    //   formData.append(f, fields[f]);
+    // }
     const res = await fetch("http://localhost:3500/upload", {
       method: "POST",
       body: formData,

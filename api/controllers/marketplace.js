@@ -1,4 +1,5 @@
 const express = require("express");
+const cloudinary = require("cloudinary").v2;
 
 const marketplaceRouter = express.Router();
 const Marketplace = require("../models/marketplace.js");
@@ -23,6 +24,7 @@ marketplaceRouter.post("/", async (req, res) => {
 
 //PUT
 marketplaceRouter.put("/:id", async (req, res) => {
+  const imageUpdate = await Marketplace.findById(req.params.id);
   const updatedMarketitem = await Marketplace.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -30,6 +32,11 @@ marketplaceRouter.put("/:id", async (req, res) => {
       new: true,
     }
   ).exec();
+  if (imageUpdate) {
+    const tempArray = imageUpdate.image.split(/[/.]/g);
+    imageName = tempArray[tempArray.length - 2];
+    await cloudinary.uploader.destroy(imageName);
+  }
   res.status(200).send(updatedMarketitem);
 });
 
@@ -38,6 +45,12 @@ marketplaceRouter.delete("/:id", async (req, res) => {
   const deletedMarketitem = await Marketplace.findByIdAndRemove(
     req.params.id
   ).exec();
+  let imageName = "";
+  if (deletedMarketitem) {
+    const tempArray = deletedMarketitem.image.split(/[/.]/g);
+    imageName = tempArray[tempArray.length - 2];
+    await cloudinary.uploader.destroy(imageName);
+  }
   res.status(200).send(deletedMarketitem);
 });
 

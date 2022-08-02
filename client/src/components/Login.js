@@ -21,6 +21,7 @@ const Login = (props) => {
     const data = await res.json();
     console.log(data.msg);
     props.handleLogin(data.authorised);
+    console.log(data.currentUser);
   };
 
   return (
