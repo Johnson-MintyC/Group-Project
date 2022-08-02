@@ -30,10 +30,6 @@ const MarketItemEdit = (props) => {
   const handleSubmit = async (event) => {
     const index = props.marketplace.indexOf(editedItem);
     event.preventDefault();
-    // props.setMarketplace(fields);
-    // props.handleEdit(itemID, fields, index);
-    // console.log(itemID, fields, index);
-    // setFields(initialState);
     const formData = new FormData();
 
     formData.append("photo", photo);
