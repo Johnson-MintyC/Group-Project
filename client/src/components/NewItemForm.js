@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import Autocomplete from "react-google-autocomplete";
 
-const NewItemForm = (props) => {
-  const initialState = {
-    name: "",
-    categories: "",
-    image: "",
-    description: "",
-    price: 0,
-    deliverable: false,
-    location: "",
-  };
+const initialState = {
+  name: "",
+  categories: "",
+  image: "",
+  description: "",
+  price: 0,
+  deliverable: false,
+  location: "",
+};
 
+const NewItemForm = (props) => {
   const [fields, setFields] = useState(initialState);
   const [photo, setPhoto] = useState(null);
+  const [location, setLocation] = useState(null);
 
+  useEffect(() => {
+    setFields({ ...fields, location: location });
+  }, [location]);
   const handleChange = (event) => {
     //
     const { name, value, checked, files } = event.target;
@@ -38,6 +42,8 @@ const NewItemForm = (props) => {
     event.preventDefault();
     // console.log(fields);
     // props.handleCreate(fields);
+    console.log({ ...fields, location });
+
     const formData = new FormData();
 
     formData.append("photo", photo);
@@ -49,6 +55,7 @@ const NewItemForm = (props) => {
       body: formData,
     });
     const data = await res.json();
+
     console.log(data.path);
     props.handleCreate({ ...fields, image: data.path });
   };
@@ -93,14 +100,11 @@ const NewItemForm = (props) => {
         </div>
         <div>
           <label>Location: </label>
-          {/* <Autocomplete
+          <Autocomplete
             apiKey={process.env.REACT_APP_GOOGLE_API}
-            onPlaceSelected={(place) => {
-              console.log(place);
-              setFields({ ...fields, location: place.formatted_address });
-            }}
-          /> */}
-          <input name="location" type="text" onChange={handleChange} />
+            onPlaceSelected={(place) => setLocation(place.formatted_address)}
+          />
+          {/* <input name="location" type="text" onChange={handleChange} /> */}
         </div>
         <input type="submit" value="Submit" />
       </form>

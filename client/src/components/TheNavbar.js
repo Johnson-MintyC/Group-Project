@@ -18,9 +18,9 @@ const TheNavbar = (props) => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link to="/login">Login</Nav.Link>
-            <Nav.Link to="/logout">Logout</Nav.Link>
-            <Nav.Link to="/marketplace/newitem">Add</Nav.Link>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/logout">Logout</Nav.Link>
+            <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"

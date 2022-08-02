@@ -122,6 +122,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/marketplace/:itemID/edit"
             element={
@@ -131,10 +132,12 @@ function App() {
               />
             }
           />
+
           <Route
             path="/marketplace/newitem"
             element={<NewItemForm handleCreate={handleCreate} />}
           />
+
           <Route path="/profile" />
         </Routes>
       ) : (
