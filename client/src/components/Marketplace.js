@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import TheNavbar from "./TheNavbar";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 const Marketitem = (props) => {
   return (
     <div key={props.item._id}>
-      <h1>{props.item.name}</h1>
-      <img src={props.item.image} />
-      <p>{props.item.description}</p>
       <Link to={`/marketplace/${props.item._id}`}>Show</Link>
     </div>
   );
@@ -14,12 +13,20 @@ const Marketitem = (props) => {
 
 const Marketplace = (props) => {
   const MarketplaceList = props.marketplace.map((item) => {
-    return <Marketitem key={item._id} item={item} />;
+    return (
+      <Card key={item._id} style={{ width: "18rem", margin: "12px" }}>
+        <Card.Img variant="top" src={item.image} />
+        <Card.Body>
+          <Card.Title>{item.name}</Card.Title>
+          <Card.Text>${item.price}</Card.Text>
+          <Marketitem key={item._id} item={item} />
+        </Card.Body>
+      </Card>
+    );
   });
   return (
     <div>
-      <Navbar />
-      <Link to="/marketplace/newitem">Add</Link>
+      <TheNavbar />
       <div>{MarketplaceList}</div>
     </div>
   );
