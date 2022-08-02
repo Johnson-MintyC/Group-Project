@@ -29,6 +29,7 @@ const Marketitem = (props) => {
         >
           Delete
         </Button>
+        <p>{Item.location}</p>
       </div>
     </div>
   );

@@ -67,7 +67,8 @@ function App() {
       method: "DELETE",
       header: `Content-Type: application/json`,
     });
-    const DeletedItem = await res.json();
+    await res.json();
+
     const arrayMinusItem = marketplace.filter((item) => {
       return item._id !== id;
     });
@@ -84,8 +85,6 @@ function App() {
       body: JSON.stringify(fields),
     });
     const editedItem = await res.json();
-    console.log(fields);
-    console.log(editedItem);
     setMarketplace([
       ...marketplace.slice(0, index),
       editedItem,
@@ -96,7 +95,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>placeholder</h1>
       {marketplace ? (
         <Routes>
           <Route

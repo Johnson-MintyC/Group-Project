@@ -1,4 +1,5 @@
 const express = require("express");
+const cloudinary = require("cloudinary").v2;
 
 const marketplaceRouter = express.Router();
 const Marketplace = require("../models/marketplace.js");
@@ -38,6 +39,12 @@ marketplaceRouter.delete("/:id", async (req, res) => {
   const deletedMarketitem = await Marketplace.findByIdAndRemove(
     req.params.id
   ).exec();
+  let imageName = "";
+  if (deletedMarketitem) {
+    const tempArray = deletedMarketitem.image.split(/[/.]/g);
+    imageName = tempArray[tempArray.length - 2];
+  }
+  await cloudinary.uploader.destroy(imageName);
   res.status(200).send(deletedMarketitem);
 });
 

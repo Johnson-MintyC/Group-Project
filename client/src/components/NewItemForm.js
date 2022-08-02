@@ -40,16 +40,13 @@ const NewItemForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(fields);
-    // props.handleCreate(fields);
-    console.log({ ...fields, location });
 
     const formData = new FormData();
 
     formData.append("photo", photo);
-    for (let f in fields) {
-      formData.append(f, fields[f]);
-    }
+    // for (let f in fields) {
+    //   formData.append(f, fields[f]);
+    // }
     const res = await fetch("http://localhost:3500/upload", {
       method: "POST",
       body: formData,
