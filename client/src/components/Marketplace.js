@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Marketitem = (props) => {
   return (
@@ -17,6 +18,7 @@ const Marketplace = (props) => {
   });
   return (
     <div>
+      <Navbar />
       <Link to="/marketplace/newitem">Add</Link>
       <div>{MarketplaceList}</div>
     </div>
