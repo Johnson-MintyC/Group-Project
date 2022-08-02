@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-import TheNavbar from "./TheNavbar";
-import Button from "react-bootstrap/Button";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 const Marketitem = (props) => {
@@ -12,10 +10,15 @@ const Marketitem = (props) => {
 };
 
 const Marketplace = (props) => {
+  const navigate = useNavigate();
   const MarketplaceList = props.marketplace.map((item) => {
     return (
       <Card key={item._id} style={{ width: "18rem", margin: "12px" }}>
-        <Card.Img variant="top" src={item.image} />
+        <Card.Img
+          onClick={() => navigate(`/marketplace/${item._id}`)}
+          variant="top"
+          src={item.image}
+        />
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>${item.price}</Card.Text>
@@ -26,7 +29,6 @@ const Marketplace = (props) => {
   });
   return (
     <div>
-      <TheNavbar />
       <div>{MarketplaceList}</div>
     </div>
   );

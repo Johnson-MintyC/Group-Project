@@ -10,7 +10,7 @@ const TheNavbar = (props) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand>Declutter</Navbar.Brand>
+        <Navbar.Brand href="/marketplace">Declutter</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -18,9 +18,15 @@ const TheNavbar = (props) => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/logout">Logout</Nav.Link>
-            <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
+            {!props.authorised ? (
+              <Nav.Link href="/login">Login</Nav.Link>
+            ) : (
+              <Nav.Link href="/logout">Logout</Nav.Link>
+            )}
+            {props.authorised && (
+              <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
+            )}
+
             <Form className="d-flex">
               <Form.Control
                 type="search"

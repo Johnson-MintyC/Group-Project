@@ -40,9 +40,11 @@ userRouter.post("/login", async (req, res) => {
     return res.status(400).json({ msg: "Username or password is incorrect" });
   } else {
     req.session.currentUser = user;
-    res
-      .status(200)
-      .json({ msg: "You have logged in successfully", authorised: true });
+    res.status(200).json({
+      msg: "You have logged in successfully",
+      authorised: true,
+      currentUser: user._id,
+    });
   }
 });
 

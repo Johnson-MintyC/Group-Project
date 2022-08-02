@@ -15,8 +15,6 @@ const MarketItemEdit = (props) => {
     const validateData = () => {
       if (event.target.type === "checkbox") {
         return { ...fields, [name]: event.target.checked };
-      } else if (event.target.file) {
-        return { ...fields, [name]: files[0] };
       } else {
         return { ...fields, [name]: value };
       }

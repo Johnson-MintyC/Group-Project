@@ -6,7 +6,9 @@ import Marketitem from "./components/Marketitem";
 import MarketItemEdit from "./components/MarketItemEdit";
 import Marketplace from "./components/Marketplace";
 import NewItemForm from "./components/NewItemForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
+import TheNavbar from "./components/TheNavbar";
 
 function App() {
   const [marketplace, setMarketplace] = useState(null);
@@ -24,15 +26,14 @@ function App() {
     navigate("/marketplace");
   };
 
-  // useEffect(() => {
-  //   const checkIfloggedIn = async () => {
-  //     const res = await fetch("/users/isauthorised");
-  //     const data = await res.json();
-  //     console.log(data.msg);
-  //     setAuthorised(data.authorised);
-  //   };
-  //   checkIfloggedIn();
-  // }, []);
+  useEffect(() => {
+    const checkIfloggedIn = async () => {
+      const res = await fetch("http://localhost:3500/users/isauthorised");
+      const data = await res.json();
+      setAuthorised(data.authorised);
+    };
+    checkIfloggedIn();
+  }, []);
 
   const makeApiCall = async () => {
     const url = "http://localhost:3500/marketplace";
@@ -40,7 +41,6 @@ function App() {
     const Marketplace = await res.json();
 
     setMarketplace(Marketplace);
-    console.log(marketplace);
   };
 
   useEffect(() => {
@@ -95,11 +95,14 @@ function App() {
 
   return (
     <div className="App">
+      <TheNavbar authorised={authorised} />
       {marketplace ? (
         <Routes>
           <Route
             path="/marketplace"
-            element={<Marketplace marketplace={marketplace} />}
+            element={
+              <Marketplace marketplace={marketplace} authorised={authorised} />
+            }
           />
           <Route
             path="/register"
