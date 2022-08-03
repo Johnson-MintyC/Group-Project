@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     const checkIfloggedIn = async () => {
-      const res = await fetch("http://localhost:3500/users/isauthorised");
+      const res = await fetch("/users/isauthorised");
       const data = await res.json();
       setAuthorised(data.authorised);
     };
@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const makeApiCall = async () => {
-    const url = "http://localhost:3500/marketplace";
+    const url = "/marketplace";
     const res = await fetch(url);
     const Marketplace = await res.json();
 
@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   const handleCreate = async (fields) => {
-    const url = "http://localhost:3500/marketplace";
+    const url = "/marketplace";
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -62,7 +62,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    const deleteURL = `http://localhost:3500/marketplace/${id}`;
+    const deleteURL = `/marketplace/${id}`;
     const res = await fetch(deleteURL, {
       method: "DELETE",
       header: `Content-Type: application/json`,
@@ -77,7 +77,7 @@ function App() {
   };
 
   const handleEdit = async (id, fields, index) => {
-    const editURL = `http://localhost:3500/marketplace/${id}`;
+    const editURL = `/marketplace/${id}`;
 
     const res = await fetch(editURL, {
       method: "PUT",
@@ -93,39 +93,45 @@ function App() {
     navigate("/marketplace");
   };
 
-  const handleSearch=(searchItem)=>{
-
-   const searchedItem= marketplace.filter((item)=>{
-    return item.name.replace(/[0-9 +/-=]/g, "").toUpperCase().includes(searchItem.toUpperCase())
-
-    })
-    console.log(searchedItem)
-    searchItem.length===0 ? makeApiCall(): setMarketplace(searchedItem)
-  }
-  const handleSort=()=>{
-   const sortedMarketPlace=  marketplace.sort((a,z)=>{
-      if(a.price>z.price){
-        return 1
-      }if(a.price<z.price){
-        return -1
+  const handleSearch = (searchItem) => {
+    const searchedItem = marketplace.filter((item) => {
+      return item.name
+        .replace(/[0-9 +/-=]/g, "")
+        .toUpperCase()
+        .includes(searchItem.toUpperCase());
+    });
+    console.log(searchedItem);
+    searchItem.length === 0 ? makeApiCall() : setMarketplace(searchedItem);
+  };
+  const handleSort = () => {
+    const sortedMarketPlace = marketplace.sort((a, z) => {
+      if (a.price > z.price) {
+        return 1;
       }
-      return 0
-     })
-  setMarketplace(sortedMarketPlace)
-    navigate('/marketplace#lowToHigh')
-  }
-const handleDeliverable=()=>{
-  const sortedDeliverable=marketplace.filter((item)=>{
-    return item.deliverable===true
-  })
-  setMarketplace(sortedDeliverable)
-  navigate('/marketplace#deliverable')
-
-}
+      if (a.price < z.price) {
+        return -1;
+      }
+      return 0;
+    });
+    setMarketplace(sortedMarketPlace);
+    navigate("/marketplace#lowToHigh");
+  };
+  const handleDeliverable = () => {
+    const sortedDeliverable = marketplace.filter((item) => {
+      return item.deliverable === true;
+    });
+    setMarketplace(sortedDeliverable);
+    navigate("/marketplace#deliverable");
+  };
 
   return (
     <div className="App">
-      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable}  />
+      <TheNavbar
+        authorised={authorised}
+        handleSearch={handleSearch}
+        handleSort={handleSort}
+        handleDeliverable={handleDeliverable}
+      />
       {marketplace ? (
         <Routes>
           <Route
