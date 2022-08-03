@@ -55,7 +55,7 @@ const MarketItemEdit = (props) => {
     }
   };
   return (
-    <div>
+    <div className="container">
       <h1>Editing {editedItem.name}</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formItemName">
@@ -68,6 +68,15 @@ const MarketItemEdit = (props) => {
             required
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formPrice">
+          <Form.Label>Price: </Form.Label>
+          <Form.Control
+            name="price"
+            type="number"
+            onChange={handleChange}
+            value={fields.price}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formCategories">
           <Form.Label>Categories: </Form.Label>
           <Form.Control
@@ -76,10 +85,6 @@ const MarketItemEdit = (props) => {
             onChange={handleChange}
             value={fields.categories}
           />
-        </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Image: </Form.Label>
-          <Form.Control name="image" type="file" onChange={handleUpload} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDescription">
           <Form.Label>Description: </Form.Label>
@@ -90,6 +95,19 @@ const MarketItemEdit = (props) => {
             type="text"
             onChange={handleChange}
             value={fields.description}
+          />
+        </Form.Group>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Image: </Form.Label>
+          <Form.Control name="image" type="file" onChange={handleUpload} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formLocation">
+          <Form.Label>Location: </Form.Label>
+          <Autocomplete
+            className="form-control"
+            apiKey={process.env.REACT_APP_GOOGLE_API}
+            onPlaceSelected={(place) => setLocation(place.formatted_address)}
+            defaultValue={fields.location}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDeliverableCheckbox">
@@ -112,27 +130,11 @@ const MarketItemEdit = (props) => {
             />
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formPrice">
-          <Form.Label>Price: </Form.Label>
-          <Form.Control
-            name="price"
-            type="number"
-            onChange={handleChange}
-            value={fields.price}
-          />
+        <Form.Group className="d-flex justify-content-end">
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formLocation">
-          <Form.Label>Location: </Form.Label>
-          <Autocomplete
-            className="form-control"
-            apiKey={process.env.REACT_APP_GOOGLE_API}
-            onPlaceSelected={(place) => setLocation(place.formatted_address)}
-            defaultValue={fields.location}
-          />
-        </Form.Group>
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>
       </Form>
     </div>
   );

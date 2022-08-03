@@ -66,7 +66,7 @@ const NewItemForm = (props) => {
     }
   };
   return (
-    <div>
+    <div className="container">
       <h1>New Item </h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formItemName">
@@ -78,6 +78,15 @@ const NewItemForm = (props) => {
             required
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formPrice">
+          <Form.Label>Price: </Form.Label>
+          <Form.Control
+            name="price"
+            type="number"
+            onChange={handleChange}
+            value={fields.price}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formCategories">
           <Form.Label>Categories: </Form.Label>
           <Form.Control
@@ -86,11 +95,6 @@ const NewItemForm = (props) => {
             onChange={handleChange}
             value={fields.categories}
           />
-        </Form.Group>
-        {/* //Images */}
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Image: </Form.Label>
-          <Form.Control name="image" type="file" onChange={handleUpload} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formDescription">
           <Form.Label>Description: </Form.Label>
@@ -102,22 +106,10 @@ const NewItemForm = (props) => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formDeliverableCheckbox">
-          <Form.Check
-            name="deliverable"
-            type="checkbox"
-            label="Deliverable"
-            onClick={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formPrice">
-          <Form.Label>Price: </Form.Label>
-          <Form.Control
-            name="price"
-            type="number"
-            onChange={handleChange}
-            value={fields.price}
-          />
+        {/* //Images */}
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Image: </Form.Label>
+          <Form.Control name="image" type="file" onChange={handleUpload} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLocation">
           <Form.Label>Location: </Form.Label>
@@ -127,9 +119,19 @@ const NewItemForm = (props) => {
             onPlaceSelected={(place) => setLocation(place.formatted_address)}
           />
         </Form.Group>
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>
+        <Form.Group className="mb-3" controlId="formDeliverableCheckbox">
+          <Form.Check
+            name="deliverable"
+            type="checkbox"
+            label="Deliverable"
+            onClick={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="d-flex justify-content-end">
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+        </Form.Group>
       </Form>
     </div>
   );
