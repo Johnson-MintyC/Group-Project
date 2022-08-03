@@ -39,6 +39,7 @@ function App() {
     const url = "http://localhost:3500/marketplace";
     const res = await fetch(url);
     const Marketplace = await res.json();
+    console.log(Marketplace);
 
     setMarketplace(Marketplace);
   };
