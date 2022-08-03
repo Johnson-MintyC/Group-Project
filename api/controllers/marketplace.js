@@ -6,7 +6,7 @@ const Marketplace = require("../models/marketplace.js");
 
 //Index
 marketplaceRouter.get("/", async (req, res) => {
-  const marketitems = await Marketplace.find({}).exec();
+  const marketitems = await Marketplace.find({}).sort("-createdAt").exec();
   res.status(200).json(marketitems);
 });
 
