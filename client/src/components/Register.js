@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = (props) => {
   const [fields, setFields] = useState({ username: "", password: "" });
+  const [warnning,setWarnning]=useState(null)
 
   const navigate = useNavigate();
 
@@ -13,6 +14,7 @@ const Register = (props) => {
     });
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const res = await fetch("/users/register", {
@@ -22,7 +24,14 @@ const Register = (props) => {
     });
     const data = await res.json();
     console.log(data);
-    navigate("/marketplace");
+    if(data.authorised){
+    navigate("/marketplace")
+  }else {
+    console.log(data)
+    setWarnning(data.msg)
+  }
+
+
   };
 
   return (
@@ -49,6 +58,7 @@ const Register = (props) => {
         />
       </div>
       <input type="submit" value="Register" />
+      <div><p>{warnning&&warnning}</p></div>
       <p>
         Already have an account? <Link to="/login">Login here</Link>
       </p>

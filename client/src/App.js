@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import Marketitem from "./components/Marketitem";
 import MarketItemEdit from "./components/MarketItemEdit";
 import Marketplace from "./components/Marketplace";
@@ -18,12 +17,12 @@ function App() {
 
   const handleAuth = (authed) => {
     setAuthorised(authed);
-    navigate("/marketplace");
+
   };
 
   const handleLogout = () => {
     setAuthorised(null);
-    navigate("/marketplace");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -126,7 +125,7 @@ const handleDeliverable=()=>{
 
   return (
     <div className="App">
-      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable} />
+      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable} handleLogout={handleLogout} />
       {marketplace ? (
         <Routes>
           <Route
@@ -140,10 +139,6 @@ const handleDeliverable=()=>{
             element={<Register handleRegister={handleAuth} />}
           />
           <Route path="/login" element={<Login handleLogin={handleAuth} />} />
-          <Route
-            path="/logout"
-            element={<Logout handleLogout={handleLogout} />}
-          />
 
           <Route
             path="/marketplace/:itemID"
