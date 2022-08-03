@@ -39,18 +39,18 @@ app.use(
 );
 
 //CORS Proper
-const whitelist = ["http://localhost:3501"];
-app.use(
-  cors({
-    origin: (origin, cb) => {
-      if (whitelist.indexOf(origin) !== -1) {
-        cb(null, true);
-      } else {
-        cb(new Error());
-      }
-    },
-  })
-);
+// const whitelist = ["http://localhost:3501"];
+// app.use(
+//   cors({
+//     origin: (origin, cb) => {
+//       if (whitelist.indexOf(origin) !== -1) {
+//         cb(null, true);
+//       } else {
+//         cb(new Error());
+//       }
+//     },
+//   })
+// );
 
 //CORS all IPs
 // app.use(
