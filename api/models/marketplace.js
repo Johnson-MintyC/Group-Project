@@ -8,7 +8,7 @@ const marketplaceSchema = mongoose.Schema({
   image: { type: String },
   description: { type: String },
   deliverable: { type: Boolean },
-});
+},{timestamps:true});
 
 const Marketplace = mongoose.model("Marketplace", marketplaceSchema);
 
