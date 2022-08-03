@@ -17,7 +17,6 @@ function App() {
 
   const handleAuth = (authed) => {
     setAuthorised(authed);
-
   };
 
   const handleLogout = () => {
@@ -91,7 +90,6 @@ function App() {
     navigate("/marketplace");
   };
 
-<<<<<<< HEAD
   const handleSearch = (searchItem) => {
     const searchedItem = marketplace.filter((item) => {
       return item.name
@@ -102,6 +100,7 @@ function App() {
     console.log(searchedItem);
     searchItem.length === 0 ? makeApiCall() : setMarketplace(searchedItem);
   };
+
   const handleSort = () => {
     const sortedMarketPlace = marketplace.sort((a, z) => {
       if (a.price > z.price) {
@@ -115,6 +114,7 @@ function App() {
     setMarketplace(sortedMarketPlace);
     navigate("/marketplace#lowToHigh");
   };
+
   const handleDeliverable = () => {
     const sortedDeliverable = marketplace.filter((item) => {
       return item.deliverable === true;
@@ -130,44 +130,8 @@ function App() {
         handleSearch={handleSearch}
         handleSort={handleSort}
         handleDeliverable={handleDeliverable}
+        handleLogout={handleLogout}
       />
-=======
-  const handleSearch=(searchItem)=>{
-
-   const searchedItem= marketplace.filter((item)=>{
-    return item.name.replace(/[0-9 +/-=]/g, "").toUpperCase().includes(searchItem.toUpperCase())
-
-    })
-    console.log(searchedItem)
-    searchItem.length===0 ? makeApiCall(): setMarketplace(searchedItem)
-  }
-
-  const handleSort=()=>{
-   const sortedMarketPlace=  marketplace.sort((a,z)=>{
-      if(a.price>z.price){
-        return 1
-      }if(a.price<z.price){
-        return -1
-      }
-      return 0
-     })
-  setMarketplace(sortedMarketPlace)
-    navigate('/marketplace#lowToHigh')
-  }
-
-const handleDeliverable=()=>{
-  const sortedDeliverable=marketplace.filter((item)=>{
-    return item.deliverable===true
-  })
-  setMarketplace(sortedDeliverable)
-  navigate('/marketplace#deliverable')
-
-}
-
-  return (
-    <div className="App">
-      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable} handleLogout={handleLogout} />
->>>>>>> 22560f7eb17c82dbea97e061d551df0523c6392c
       {marketplace ? (
         <Routes>
           <Route

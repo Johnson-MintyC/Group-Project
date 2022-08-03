@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Autocomplete from "react-google-autocomplete";
 
 const MarketItemEdit = (props) => {
   const { itemID } = useParams();
@@ -8,6 +9,11 @@ const MarketItemEdit = (props) => {
   });
   const [fields, setFields] = useState(editedItem);
   const [photo, setPhoto] = useState(null);
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    setFields({ ...fields, location: location });
+  }, [location]);
 
   const handleChange = (event) => {
     //
@@ -28,19 +34,23 @@ const MarketItemEdit = (props) => {
   const handleSubmit = async (event) => {
     const index = props.marketplace.indexOf(editedItem);
     event.preventDefault();
-    const formData = new FormData();
+    if (photo) {
+      const formData = new FormData();
 
-    formData.append("photo", photo);
-    // for (let f in fields) {
-    //   formData.append(f, fields[f]);
-    // }
-    const res = await fetch("http://localhost:3500/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await res.json();
-    console.log(data.path);
-    props.handleEdit(itemID, { ...fields, image: data.path }, index);
+      formData.append("photo", photo);
+      // for (let f in fields) {
+      //   formData.append(f, fields[f]);
+      // }
+      const res = await fetch("/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      console.log(data.path);
+      props.handleEdit(itemID, { ...fields, image: data.path }, index);
+    } else {
+      props.handleEdit(itemID, { ...fields }, index);
+    }
   };
   return (
     <div>
@@ -85,10 +95,16 @@ const MarketItemEdit = (props) => {
               name="deliverable"
               type="checkbox"
               onClick={handleChange}
+              onChange={handleChange}
               checked
             />
           ) : (
-            <input name="deliverable" type="checkbox" onClick={handleChange} />
+            <input
+              name="deliverable"
+              type="checkbox"
+              onClick={handleChange}
+              onChange={handleChange}
+            />
           )}
         </div>
         <div>
@@ -102,12 +118,16 @@ const MarketItemEdit = (props) => {
         </div>
         <div>
           <label>Location: </label>
-          <input
+          <Autocomplete
+            apiKey={process.env.REACT_APP_GOOGLE_API}
+            onPlaceSelected={(place) => setLocation(place.formatted_address)}
+          />
+          {/* <input
             name="location"
             type="text"
             onChange={handleChange}
             value={fields.location}
-          />
+          /> */}
         </div>
         <input type="submit" value="Submit" />
       </form>

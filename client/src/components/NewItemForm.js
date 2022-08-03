@@ -47,7 +47,7 @@ const NewItemForm = (props) => {
     // for (let f in fields) {
     //   formData.append(f, fields[f]);
     // }
-    const res = await fetch("http://localhost:3500/upload", {
+    const res = await fetch("/upload", {
       method: "POST",
       body: formData,
     });
