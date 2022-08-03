@@ -44,6 +44,15 @@ const Marketitem = (props) => {
         </Button>
         <p>{Item.location}</p>
       </div>
+      <div>
+      <Button
+          onClick={() => {
+            navigate('/marketplace')
+          }}
+        >
+          Go Back
+        </Button>
+       </div>
     </div>
   );
 };
