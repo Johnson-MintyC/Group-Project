@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {useState} from 'react'
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -7,6 +8,16 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const TheNavbar = (props) => {
+  const [searchItem,setSearchItem]=useState('')
+  const handlechange=(event)=>{
+    setSearchItem(event.target.value)
+  }
+  const handleSubmit=(event)=>{
+    event.preventDefault()
+    props.handleSearch(searchItem)
+    setSearchItem('')
+
+  }
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -27,16 +38,19 @@ const TheNavbar = (props) => {
               <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
             )}
 
-            <Form className="d-flex">
+            <Form className="d-flex" onSubmit={handleSubmit}>
               <Form.Control
                 type="search"
+                name='search'
+                value={searchItem}
+                onChange={handlechange}
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button type='submit'  variant="outline-success">Search</Button>
             </Form>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
+            <NavDropdown title="Filter" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 Another action

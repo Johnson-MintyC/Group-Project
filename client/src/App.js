@@ -94,9 +94,18 @@ function App() {
     navigate("/marketplace");
   };
 
+  const handleSearch=(searchItem)=>{
+
+   const searchedItem= marketplace.filter((item)=>{
+    return item.name.replace(/[0-9 +/-=]/g, "").toUpperCase().includes(searchItem.toUpperCase())
+
+    })
+    console.log(searchedItem)
+    searchItem.length===0 ? makeApiCall(): setMarketplace(searchedItem)
+  }
   return (
     <div className="App">
-      <TheNavbar authorised={authorised} />
+      <TheNavbar authorised={authorised} handleSearch={handleSearch} />
       {marketplace ? (
         <Routes>
           <Route
