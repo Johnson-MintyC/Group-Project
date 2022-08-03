@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link,useNavigate} from "react-router-dom";
 const Login = (props) => {
+  const navigate=useNavigate()
   const [fields, setFields] = useState({ username: "", password: "" });
-
+ const [warnning,setWarnning]=useState(null)
   const handleChange = (event) => {
     setFields({
       ...fields,
@@ -19,9 +19,13 @@ const Login = (props) => {
       body: JSON.stringify(fields),
     });
     const data = await res.json();
-    console.log(data.msg);
-    props.handleLogin(data.authorised);
-    console.log(data.currentUser);
+    if(data.authorised){
+      navigate('/marketplace')
+      props.handleLogin(data.authorised);
+    }else{
+      setWarnning(data.msg)
+
+    }
   };
 
   return (
@@ -46,7 +50,9 @@ const Login = (props) => {
           type="password"
           id="password"
         />
+
       </div>
+      <p>{warnning&&warnning}</p>
       <input type="submit" value="Login" />
       <p>
         No account yet? <Link to="/register">Register here</Link>

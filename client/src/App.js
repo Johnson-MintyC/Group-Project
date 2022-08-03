@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import Marketitem from "./components/Marketitem";
 import MarketItemEdit from "./components/MarketItemEdit";
 import Marketplace from "./components/Marketplace";
@@ -18,12 +17,12 @@ function App() {
 
   const handleAuth = (authed) => {
     setAuthorised(authed);
-    navigate("/marketplace");
+
   };
 
   const handleLogout = () => {
     setAuthorised(null);
-    navigate("/marketplace");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -39,7 +38,6 @@ function App() {
     const url = "/marketplace";
     const res = await fetch(url);
     const Marketplace = await res.json();
-
     setMarketplace(Marketplace);
   };
 
@@ -93,6 +91,7 @@ function App() {
     navigate("/marketplace");
   };
 
+<<<<<<< HEAD
   const handleSearch = (searchItem) => {
     const searchedItem = marketplace.filter((item) => {
       return item.name
@@ -132,6 +131,43 @@ function App() {
         handleSort={handleSort}
         handleDeliverable={handleDeliverable}
       />
+=======
+  const handleSearch=(searchItem)=>{
+
+   const searchedItem= marketplace.filter((item)=>{
+    return item.name.replace(/[0-9 +/-=]/g, "").toUpperCase().includes(searchItem.toUpperCase())
+
+    })
+    console.log(searchedItem)
+    searchItem.length===0 ? makeApiCall(): setMarketplace(searchedItem)
+  }
+
+  const handleSort=()=>{
+   const sortedMarketPlace=  marketplace.sort((a,z)=>{
+      if(a.price>z.price){
+        return 1
+      }if(a.price<z.price){
+        return -1
+      }
+      return 0
+     })
+  setMarketplace(sortedMarketPlace)
+    navigate('/marketplace#lowToHigh')
+  }
+
+const handleDeliverable=()=>{
+  const sortedDeliverable=marketplace.filter((item)=>{
+    return item.deliverable===true
+  })
+  setMarketplace(sortedDeliverable)
+  navigate('/marketplace#deliverable')
+
+}
+
+  return (
+    <div className="App">
+      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable} handleLogout={handleLogout} />
+>>>>>>> 22560f7eb17c82dbea97e061d551df0523c6392c
       {marketplace ? (
         <Routes>
           <Route
@@ -145,10 +181,6 @@ function App() {
             element={<Register handleRegister={handleAuth} />}
           />
           <Route path="/login" element={<Login handleLogin={handleAuth} />} />
-          <Route
-            path="/logout"
-            element={<Logout handleLogout={handleLogout} />}
-          />
 
           <Route
             path="/marketplace/:itemID"

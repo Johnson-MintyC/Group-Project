@@ -18,6 +18,13 @@ const TheNavbar = (props) => {
     setSearchItem('')
 
   }
+  const handleClick = async () => {
+    const res = await fetch("/users/logout", {
+      method: "POST",
+    });
+    const data = await res.json();
+    props.handleLogout();
+  };
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -32,7 +39,7 @@ const TheNavbar = (props) => {
             {!props.authorised ? (
               <Nav.Link href="/login">Login</Nav.Link>
             ) : (
-              <Nav.Link href="/logout">Logout</Nav.Link>
+              <Nav.Link onClick={handleClick}>Logout</Nav.Link>
             )}
             {props.authorised && (
               <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
@@ -50,7 +57,7 @@ const TheNavbar = (props) => {
               />
               <Button type='submit'  variant="outline-success">Search</Button>
             </Form>
-            <NavDropdown  title="Sort By" id="navbarScrollingDropdown">
+            <NavDropdown   title="Sort By" id="navbarScrollingDropdown">
               <NavDropdown.Item onClick={props.handleSort}>Price(low-to-high)</NavDropdown.Item>
               <NavDropdown.Item onClick={props.handleDeliverable}>
                 Deliverable
