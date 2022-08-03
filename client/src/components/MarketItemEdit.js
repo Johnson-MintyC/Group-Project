@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Autocomplete from "react-google-autocomplete";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const MarketItemEdit = (props) => {
   const { itemID } = useParams();
@@ -55,82 +57,83 @@ const MarketItemEdit = (props) => {
   return (
     <div>
       <h1>Editing {editedItem.name}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formItemName">
+          <Form.Label>Name: </Form.Label>
+          <Form.Control
             name="name"
             type="text"
             value={fields.name}
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
-          <label>Categories: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formCategories">
+          <Form.Label>Categories: </Form.Label>
+          <Form.Control
             name="categories"
             type="text"
             onChange={handleChange}
             value={fields.categories}
           />
-        </div>
-        <div>
-          <label>Image: </label>
-          <input name="image" type="file" onChange={handleUpload} />
-        </div>
-        <div>
-          <label>Description: </label>
-          <textarea
+        </Form.Group>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Image: </Form.Label>
+          <Form.Control name="image" type="file" onChange={handleUpload} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label>Description: </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
             name="description"
             type="text"
             onChange={handleChange}
             value={fields.description}
           />
-        </div>
-        <div>
-          <label>Deliverable: </label>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDeliverableCheckbox">
           {fields.deliverable ? (
-            <input
+            <Form.Check
               name="deliverable"
               type="checkbox"
+              label="Deliverable"
               onClick={handleChange}
               onChange={handleChange}
               checked
             />
           ) : (
-            <input
+            <Form.Check
               name="deliverable"
               type="checkbox"
+              label="Deliverable"
               onClick={handleChange}
               onChange={handleChange}
             />
           )}
-        </div>
-        <div>
-          <label>Price: </label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formPrice">
+          <Form.Label>Price: </Form.Label>
+          <Form.Control
             name="price"
             type="number"
             onChange={handleChange}
             value={fields.price}
           />
-        </div>
-        <div>
-          <label>Location: </label>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formLocation">
+          <Form.Label>Location: </Form.Label>
           <Autocomplete
+            className="form-control"
             apiKey={process.env.REACT_APP_GOOGLE_API}
             onPlaceSelected={(place) => setLocation(place.formatted_address)}
+            defaultValue={fields.location}
           />
-          {/* <input
-            name="location"
-            type="text"
-            onChange={handleChange}
-            value={fields.location}
-          /> */}
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
+        </Form.Group>
+        <Button type="submit" variant="primary">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };

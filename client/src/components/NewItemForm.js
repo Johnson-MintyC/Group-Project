@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import Autocomplete from "react-google-autocomplete";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "./newitemform.css";
 
 const initialState = {
   name: "",
@@ -40,71 +43,94 @@ const NewItemForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (photo) {
+      const formData = new FormData();
 
-    const formData = new FormData();
+      formData.append("photo", photo);
+      // for (let f in fields) {
+      //   formData.append(f, fields[f]);
+      // }
+      const res = await fetch("/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
 
-    formData.append("photo", photo);
-    // for (let f in fields) {
-    //   formData.append(f, fields[f]);
-    // }
-    const res = await fetch("/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await res.json();
-
-    console.log(data.path);
-    props.handleCreate({ ...fields, image: data.path });
+      console.log(data.path);
+      props.handleCreate({ ...fields, image: data.path });
+    } else {
+      props.handleCreate({
+        ...fields,
+        image: `https://loremflickr.com/320/240/${fields.name}`,
+      });
+    }
   };
   return (
     <div>
       <h1>New Item </h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
-          <input name="name" type="text" onChange={handleChange} required />
-        </div>
-        <div>
-          <label>Categories: </label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formItemName">
+          <Form.Label>Name: </Form.Label>
+          <Form.Control
+            name="name"
+            type="text"
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formCategories">
+          <Form.Label>Categories: </Form.Label>
+          <Form.Control
             name="categories"
             type="text"
             onChange={handleChange}
             value={fields.categories}
           />
-        </div>
+        </Form.Group>
         {/* //Images */}
-        <div>
-          <label>Image: </label>
-          <input name="image" type="file" onChange={handleUpload} />
-        </div>
-        <div>
-          <label>Description: </label>
-          <textarea name="description" type="text" onChange={handleChange} />
-        </div>
-        <div>
-          <label>Deliverable: </label>
-          <input name="deliverable" type="checkbox" onClick={handleChange} />
-        </div>
-        <div>
-          <label>Price: </label>
-          <input
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label>Image: </Form.Label>
+          <Form.Control name="image" type="file" onChange={handleUpload} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label>Description: </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            name="description"
+            type="text"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDeliverableCheckbox">
+          <Form.Check
+            name="deliverable"
+            type="checkbox"
+            label="Deliverable"
+            onClick={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formPrice">
+          <Form.Label>Price: </Form.Label>
+          <Form.Control
             name="price"
             type="number"
             onChange={handleChange}
             value={fields.price}
           />
-        </div>
-        <div>
-          <label>Location: </label>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formLocation">
+          <Form.Label>Location: </Form.Label>
           <Autocomplete
+            className="form-control"
             apiKey={process.env.REACT_APP_GOOGLE_API}
             onPlaceSelected={(place) => setLocation(place.formatted_address)}
           />
-          {/* <input name="location" type="text" onChange={handleChange} /> */}
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
+        </Form.Group>
+        <Button type="submit" variant="primary">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };
