@@ -50,7 +50,7 @@ const TheNavbar = (props) => {
               />
               <Button type='submit'  variant="outline-success">Search</Button>
             </Form>
-            <NavDropdown  title="Sort By" id="navbarScrollingDropdown">
+            <NavDropdown   title="Sort By" id="navbarScrollingDropdown">
               <NavDropdown.Item onClick={props.handleSort}>Price(low-to-high)</NavDropdown.Item>
               <NavDropdown.Item onClick={props.handleDeliverable}>
                 Deliverable

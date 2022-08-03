@@ -1,6 +1,6 @@
 const Logout = (props) => {
   const handleClick = async () => {
-    const res = await fetch("http://localhost:3500/users/logout", {
+    const res = await fetch("/users/logout", {
       method: "POST",
     });
     const data = await res.json();
