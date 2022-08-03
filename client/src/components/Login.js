@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
-
 const Login = (props) => {
   const navigate=useNavigate()
   const [fields, setFields] = useState({ username: "", password: "" });
