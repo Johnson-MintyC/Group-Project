@@ -57,16 +57,21 @@ const NewItemForm = (props) => {
       const data = await res.json();
 
       console.log(data.path);
-      props.handleCreate({ ...fields, image: data.path });
+      props.handleCreate({
+        ...fields,
+        image: data.path,
+        postowner: props.currentSessionUser,
+      });
     } else {
       props.handleCreate({
         ...fields,
         image: `https://loremflickr.com/320/240/${fields.name}`,
+        postowner: props.currentSessionUser,
       });
     }
   };
   return (
-    <div className="container">
+    <div className="newForm">
       <h1>New Item </h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formItemName">

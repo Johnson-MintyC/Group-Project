@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Autocomplete from "react-google-autocomplete";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import "./marketitemedit.css";
 
 const MarketItemEdit = (props) => {
   const { itemID } = useParams();
@@ -55,7 +56,7 @@ const MarketItemEdit = (props) => {
     }
   };
   return (
-    <div className="container">
+    <div className="editForm">
       <h1>Editing {editedItem.name}</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formItemName">
