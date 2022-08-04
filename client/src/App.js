@@ -163,30 +163,36 @@ function App() {
           <Route
             path="/marketplace/:itemID"
             element={
+              <ProtectedRoute authorised={authorised}>
               <Marketitem
                 marketplace={marketplace}
                 handleDelete={handleDelete}
               />
+              </ProtectedRoute>
             }
           />
 
           <Route
             path="/marketplace/:itemID/edit"
             element={
+              <ProtectedRoute authorised={authorised}>
               <MarketItemEdit
                 marketplace={marketplace}
                 handleEdit={handleEdit}
               />
+              </ProtectedRoute>
             }
           />
 
           <Route
             path="/marketplace/newitem"
             element={
+              <ProtectedRoute authorised={authorised}>
               <NewItemForm
                 handleCreate={handleCreate}
                 currentSessionUser={currentSessionUser}
               />
+              </ProtectedRoute>
             }
           />
 
