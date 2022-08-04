@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import './login.css'
 
 const Register = (props) => {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -37,9 +38,10 @@ const Register = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Register</h1>
-      <div>
+      <div className="username">
         <label htmlFor="username">Username</label>
-        <input
+        <br></br>
+        <input className="inputBox"
           value={fields.username}
           onChange={handleChange}
           name="username"
@@ -47,9 +49,10 @@ const Register = (props) => {
           id="username"
         />
       </div>
-      <div>
+      <div className="password">
         <label htmlFor="password">Password</label>
-        <input
+        <br></br>
+        <input className="inputBox"
           value={fields.password}
           onChange={handleChange}
           name="password"
@@ -57,9 +60,9 @@ const Register = (props) => {
           id="password"
         />
       </div>
-      <input type="submit" value="Register" />
+      <input className="button" type="submit" value="Register" />
       <div><p>{warnning&&warnning}</p></div>
-      <p>
+      <p><br></br>
         Already have an account? <Link to="/login">Login here</Link>
       </p>
     </form>

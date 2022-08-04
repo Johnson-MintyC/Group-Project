@@ -1,7 +1,7 @@
 .container{
     display:grid;
-    grid-template-column:1fr 1fr 1fr;
-    grid-template-row: auto 15rem 15rem auto
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 15rem 15rem auto
 }
 .image{
     grid-row:2/3;
