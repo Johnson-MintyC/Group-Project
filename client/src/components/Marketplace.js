@@ -45,7 +45,7 @@ const Marketplace = (props) => {
           className="carouselImage"
           onClick={() => navigate(`/marketplace/${item._id}`)}
           style={{
-            height: "15rem",
+            height: "20rem",
             objectFit: "cover",
             objectPositionq: "center",
           }}
