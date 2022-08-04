@@ -31,7 +31,7 @@ function App() {
     const checkIfloggedIn = async () => {
       const res = await fetch("/users/isauthorised");
       const data = await res.json();
-      setCurrentUser(data);
+      setCurrentUser(data.user._id);
       setAuthorised(data.authorised);
     };
     checkIfloggedIn();
@@ -58,7 +58,6 @@ function App() {
       body: JSON.stringify(fields),
     });
     const newItem = await res.json();
-    console.log(newItem);
     setMarketplace([...marketplace, newItem]);
     navigate("/marketplace");
   };
@@ -102,7 +101,6 @@ function App() {
         .toUpperCase()
         .includes(searchItem.toUpperCase());
     });
-    console.log(searchedItem);
     searchItem.length === 0 ? makeApiCall() : setMarketplace(searchedItem);
   };
 
@@ -160,6 +158,7 @@ function App() {
                 <Marketitem
                   marketplace={marketplace}
                   handleDelete={handleDelete}
+                  currentUser={currentUser}
                 />
               </ProtectedRoute>
             }

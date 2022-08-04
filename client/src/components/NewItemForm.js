@@ -12,7 +12,7 @@ const initialState = {
   price: 0,
   deliverable: false,
   location: "",
-  user: "",
+  postowner: "",
 };
 
 const NewItemForm = (props) => {
@@ -42,7 +42,6 @@ const NewItemForm = (props) => {
     setPhoto(event.target.files[0]);
   };
 
-  console.log(props.currentSessionUser);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (photo) {
