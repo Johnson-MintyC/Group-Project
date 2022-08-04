@@ -56,6 +56,8 @@ userRouter.post("/logout", async (req, res) => {
 });
 
 userRouter.get("/isauthorised", async (req, res) => {
+  console.log("is authorised");
+  console.log(req.session.currentUser);
   if (req.session.currentUser) {
     return res.status(200).json({
       msg: "User is logged in",

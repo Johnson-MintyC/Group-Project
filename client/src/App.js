@@ -17,7 +17,6 @@ function App() {
 
   const handleAuth = (authed) => {
     setAuthorised(authed);
-
   };
 
   const handleLogout = () => {
@@ -91,41 +90,48 @@ function App() {
     navigate("/marketplace");
   };
 
-  const handleSearch=(searchItem)=>{
+  const handleSearch = (searchItem) => {
+    const searchedItem = marketplace.filter((item) => {
+      return item.name
+        .replace(/[0-9 +/-=]/g, "")
+        .toUpperCase()
+        .includes(searchItem.toUpperCase());
+    });
+    console.log(searchedItem);
+    searchItem.length === 0 ? makeApiCall() : setMarketplace(searchedItem);
+  };
 
-   const searchedItem= marketplace.filter((item)=>{
-    return item.name.replace(/[0-9 +/-=]/g, "").toUpperCase().includes(searchItem.toUpperCase())
-
-    })
-    console.log(searchedItem)
-    searchItem.length===0 ? makeApiCall(): setMarketplace(searchedItem)
-  }
-
-  const handleSort=()=>{
-   const sortedMarketPlace=  marketplace.sort((a,z)=>{
-      if(a.price>z.price){
-        return 1
-      }if(a.price<z.price){
-        return -1
+  const handleSort = () => {
+    const sortedMarketPlace = marketplace.sort((a, z) => {
+      if (a.price > z.price) {
+        return 1;
       }
-      return 0
-     })
-  setMarketplace(sortedMarketPlace)
-    navigate('/marketplace#lowToHigh')
-  }
+      if (a.price < z.price) {
+        return -1;
+      }
+      return 0;
+    });
+    setMarketplace(sortedMarketPlace);
+    navigate("/marketplace#lowToHigh");
+  };
 
-const handleDeliverable=()=>{
-  const sortedDeliverable=marketplace.filter((item)=>{
-    return item.deliverable===true
-  })
-  setMarketplace(sortedDeliverable)
-  navigate('/marketplace#deliverable')
-
-}
+  const handleDeliverable = () => {
+    const sortedDeliverable = marketplace.filter((item) => {
+      return item.deliverable === true;
+    });
+    setMarketplace(sortedDeliverable);
+    navigate("/marketplace#deliverable");
+  };
 
   return (
     <div className="App">
-      <TheNavbar authorised={authorised} handleSearch={handleSearch} handleSort={handleSort} handleDeliverable={handleDeliverable} handleLogout={handleLogout} />
+      <TheNavbar
+        authorised={authorised}
+        handleSearch={handleSearch}
+        handleSort={handleSort}
+        handleDeliverable={handleDeliverable}
+        handleLogout={handleLogout}
+      />
       {marketplace ? (
         <Routes>
           <Route
