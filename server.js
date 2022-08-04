@@ -46,7 +46,7 @@ app.use(express.static(__dirname + '/client/build'))
 /////////////////////
 //  Controllers
 /////////////////////
-app.use("/marketplace", marketplaceController);
+app.use("/api/marketplace", marketplaceController);
 app.use("/users", userController);
 app.use("/upload", uploadController);
 app.get('*', (req, res) => {
