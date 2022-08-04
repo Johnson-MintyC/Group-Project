@@ -15,11 +15,11 @@ const Marketitem = (props) => {
   return (
     <div className="container">
       <Row className="mainContainer">
-        <Card.Img
+        <img
           className="marketImg"
           style={{
             width: "30rem",
-            maxHeight: "40rem",
+            height: "40rem",
             objectFit: "cover",
           }}
           src={Item.image}

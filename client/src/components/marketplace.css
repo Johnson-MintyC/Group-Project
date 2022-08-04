@@ -1,0 +1,9 @@
+
+.carousel-slider {
+    display: flex !important;
+    justify-content: space-evenly !important;
+}
+
+.slide-wrapper {
+    margin-left: 5rem !important;
+}
