@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
+
 import './login.css'
+
 const Login = (props) => {
+
   const navigate=useNavigate()
   const [fields, setFields] = useState({ username: "", password: "" });
  const [warnning,setWarnning]=useState(null)
@@ -28,14 +31,25 @@ const Login = (props) => {
 
     }
   };
+  const googleSuccess=(res)=>{
+    console.log(res)
+  }
+  const googleFailure=()=>{
+    console.log('Google Sign in was unsuccessful')
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
-      <div className="username">
+
+    <div className="auth-wrapper">
+          <div className="auth-inner">
+    <form onSubmit={handleSubmit} >
+      <h3>Sign In</h3>
+      <div className='mb-3'>
         <label htmlFor="username">Username</label>
-        <br></br>
-        <input className="inputBox"
+        <input
+          className='form-control'
+          placeholder='Username'
+
           value={fields.username}
           onChange={handleChange}
           name="username"
@@ -43,7 +57,9 @@ const Login = (props) => {
           id="username"
         />
       </div>
-      <div className="password">
+
+      <div className='mb-3'>
+
         <label htmlFor="password">Password</label>
         <br></br>
         <input className="inputBox"
@@ -52,14 +68,22 @@ const Login = (props) => {
           name="password"
           type="password"
           id="password"
+          className='form-control'
+          placeholder='Enter password'
         />
       </div>
-      <p>{warnning&&warnning}</p>
-      <input className="button" type="submit" value="Login" />
-      <p><br></br>
+
+      {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
+      <div className='d-grid'>
+      <input type="submit" value="Login" />
+      </div>
+      <p className='forgot-password text-right'>
+
         No account yet? <Link to="/register">Register here</Link>
       </p>
     </form>
+    </div>
+        </div>
   );
 };
 

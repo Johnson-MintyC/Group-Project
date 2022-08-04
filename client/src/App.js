@@ -8,6 +8,8 @@ import NewItemForm from "./components/NewItemForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import TheNavbar from "./components/TheNavbar";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
 
 function App() {
   const [marketplace, setMarketplace] = useState(null);
@@ -124,6 +126,7 @@ function App() {
   };
 
   return (
+
     <div className="App">
       <TheNavbar
         authorised={authorised}
@@ -132,7 +135,9 @@ function App() {
         handleDeliverable={handleDeliverable}
         handleLogout={handleLogout}
       />
+
       {marketplace ? (
+
         <Routes>
           <Route
             path="/marketplace"
@@ -144,7 +149,9 @@ function App() {
             path="/register"
             element={<Register handleRegister={handleAuth} />}
           />
+
           <Route path="/login" element={<Login handleLogin={handleAuth} />} />
+
 
           <Route
             path="/marketplace/:itemID"
@@ -173,6 +180,7 @@ function App() {
 
           <Route path="/profile" />
         </Routes>
+
       ) : (
         <div>loading...</div>
       )}

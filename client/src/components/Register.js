@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import './login.css'
+
 
 const Register = (props) => {
   const [fields, setFields] = useState({ username: "", password: "" });
@@ -36,20 +38,28 @@ const Register = (props) => {
   };
 
   return (
+    <div className="auth-wrapper">
+    <div className="auth-inner">
     <form onSubmit={handleSubmit}>
-      <h1>Register</h1>
-      <div className="username">
+
+      <h3>Register</h3>
+      <div className='mb-3'>
+
         <label htmlFor="username">Username</label>
         <br></br>
         <input className="inputBox"
           value={fields.username}
           onChange={handleChange}
+          placeholder='Username'
+          className='form-control'
           name="username"
           type="text"
           id="username"
         />
       </div>
-      <div className="password">
+
+      <div className='mb-3'>
+
         <label htmlFor="password">Password</label>
         <br></br>
         <input className="inputBox"
@@ -58,14 +68,23 @@ const Register = (props) => {
           name="password"
           type="password"
           id="password"
+          className='form-control'
+          placeholder='Enter password'
         />
+
       </div>
-      <input className="button" type="submit" value="Register" />
-      <div><p>{warnning&&warnning}</p></div>
-      <p><br></br>
+      {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
+      <div className='d-grid'>
+      <input  type="submit" value="Register" />
+      </div>
+
+      <p className='forgot-password text-right'>
+
         Already have an account? <Link to="/login">Login here</Link>
       </p>
     </form>
+    </div>
+        </div>
   );
 };
 
