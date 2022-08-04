@@ -27,18 +27,18 @@ const Marketplace = (props) => {
             height:'25rem',
             objectFit:'cover' }}
         />
-        <Card.Body>
+        <Card.Body className="cardBody">
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>${item.price}</Card.Text>
-          <Button  onClick={() => navigate(`/marketplace/${item._id}`)}>Details </Button>
+          <button class="button-55" onClick={() => navigate(`/marketplace/${item._id}`)}  role="button">Details</button>
         </Card.Body>
       </Card>
       </Col>
     );
   });
   return (
-    <div>
-      <Row>
+    <div >
+      <Row className="mainContainer">
       {MarketplaceList}
       </Row>
     </div>
