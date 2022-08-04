@@ -28,7 +28,7 @@ const Marketitem = (props) => {
 
       </Card.Body>
       <iframe className='iframe'
-              src={`https://www.google.com/maps/embed/v1/place?key='AIzaSyCY0hoejDASnmYDlZMBSTZ5cEUIO4m8Qjw'}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API}
               &q=${Item.location}&language=en`}
               width="400"
               height="325"
