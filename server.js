@@ -8,7 +8,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const mongoDBSession = require("connect-mongodb-session");
-const cors = require("cors");
+
 
 const app = express();
 const PORT = process.env.PORT;
@@ -38,37 +38,20 @@ app.use(
   })
 );
 
-//CORS Proper
-// const whitelist = ["http://localhost:3501"];
-// app.use(
-//   cors({
-//     origin: (origin, cb) => {
-//       if (whitelist.indexOf(origin) !== -1) {
-//         cb(null, true);
-//       } else {
-//         cb(new Error());
-//       }
-//     },
-//   })
-// );
 
-//CORS all IPs
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(express.static(__dirname + '/client/build'))
 /////////////////////
 //  Controllers
 /////////////////////
 app.use("/marketplace", marketplaceController);
 app.use("/users", userController);
 app.use("/upload", uploadController);
-
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/client/build/index.html')
+})
 /////////////////////
 //  Listeners & DB
 /////////////////////
