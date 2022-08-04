@@ -12,7 +12,6 @@ const Login = (props) => {
       [event.target.name]: event.target.value,
     });
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const res = await fetch("/users/login", {

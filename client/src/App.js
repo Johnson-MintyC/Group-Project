@@ -14,7 +14,6 @@ import "./App.css";
 function App() {
   const [marketplace, setMarketplace] = useState(null);
   const [authorised, setAuthorised] = useState(null);
-  const [currentSessionUser, setCurrentSessionUser] = useState("");
 
   const navigate = useNavigate();
 
@@ -150,15 +149,7 @@ function App() {
             element={<Register handleRegister={handleAuth} />}
           />
 
-          <Route
-            path="/login"
-            element={
-              <Login
-                handleLogin={handleAuth}
-                setCurrentSessionUser={setCurrentSessionUser}
-              />
-            }
-          />
+          <Route path="/login" element={<Login handleLogin={handleAuth} />} />
 
           <Route
             path="/marketplace/:itemID"
@@ -190,7 +181,7 @@ function App() {
               <ProtectedRoute authorised={authorised}>
               <NewItemForm
                 handleCreate={handleCreate}
-                currentSessionUser={currentSessionUser}
+              
               />
               </ProtectedRoute>
             }
