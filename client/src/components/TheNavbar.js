@@ -26,9 +26,9 @@ const TheNavbar = (props) => {
     props.handleLogout();
   };
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg"  >
       <Container fluid>
-        <Navbar.Brand href="/marketplace">Declutter</Navbar.Brand>
+        <Navbar.Brand href="/marketplace">Marketplace</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -44,8 +44,15 @@ const TheNavbar = (props) => {
             {props.authorised && (
               <Nav.Link href="/marketplace/newitem">Add</Nav.Link>
             )}
+          </Nav>
 
-            <Form className="d-flex" onSubmit={handleSubmit}>
+             <NavDropdown   title="Sort By" id="navbarScrollingDropdown">
+              <NavDropdown.Item onClick={props.handleSort}>Price(low-to-high)</NavDropdown.Item>
+              <NavDropdown.Item onClick={props.handleDeliverable}>
+                Deliverable
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Form className="d-flex mx-3 " onSubmit={handleSubmit} >
               <Form.Control
                 type="search"
                 name='search'
@@ -57,13 +64,7 @@ const TheNavbar = (props) => {
               />
               <Button type='submit'  variant="outline-success">Search</Button>
             </Form>
-            <NavDropdown   title="Sort By" id="navbarScrollingDropdown">
-              <NavDropdown.Item onClick={props.handleSort}>Price(low-to-high)</NavDropdown.Item>
-              <NavDropdown.Item onClick={props.handleDeliverable}>
-                Deliverable
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
