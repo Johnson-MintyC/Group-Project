@@ -12,6 +12,7 @@ const initialState = {
   price: 0,
   deliverable: false,
   location: "",
+  user: "",
 };
 
 const NewItemForm = (props) => {
@@ -60,13 +61,13 @@ const NewItemForm = (props) => {
       props.handleCreate({
         ...fields,
         image: data.path,
-        postowner: props.currentSessionUser,
+        postowner: props.currentUser,
       });
     } else {
       props.handleCreate({
         ...fields,
         image: `https://loremflickr.com/320/240/${fields.name}`,
-        postowner: props.currentSessionUser,
+        postowner: props.currentUser,
       });
     }
   };

@@ -18,7 +18,8 @@ const Marketitem = (props) => {
         <Card.Img
           className="marketImg"
           style={{
-            width: "700px",
+            width: "30rem",
+            maxHeight: "40rem",
             objectFit: "cover",
           }}
           src={Item.image}

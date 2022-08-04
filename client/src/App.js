@@ -14,7 +14,7 @@ import "./App.css";
 function App() {
   const [marketplace, setMarketplace] = useState(null);
   const [authorised, setAuthorised] = useState(null);
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   const handleAuth = (authed) => {
@@ -181,7 +181,10 @@ function App() {
             path="/marketplace/newitem"
             element={
               <ProtectedRoute authorised={authorised}>
-                <NewItemForm handleCreate={handleCreate} />
+                <NewItemForm
+                  handleCreate={handleCreate}
+                  currentUser={currentUser}
+                />
               </ProtectedRoute>
             }
           />
