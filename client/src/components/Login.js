@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
-import Alert from 'react-bootstrap/Alert';
+
+import './login.css'
 
 const Login = (props) => {
 
@@ -38,6 +39,7 @@ const Login = (props) => {
   }
 
   return (
+
     <div className="auth-wrapper">
           <div className="auth-inner">
     <form onSubmit={handleSubmit} >
@@ -47,6 +49,7 @@ const Login = (props) => {
         <input
           className='form-control'
           placeholder='Username'
+
           value={fields.username}
           onChange={handleChange}
           name="username"
@@ -54,9 +57,12 @@ const Login = (props) => {
           id="username"
         />
       </div>
+
       <div className='mb-3'>
+
         <label htmlFor="password">Password</label>
-        <input
+        <br></br>
+        <input className="inputBox"
           value={fields.password}
           onChange={handleChange}
           name="password"
@@ -65,13 +71,14 @@ const Login = (props) => {
           className='form-control'
           placeholder='Enter password'
         />
-
       </div>
+
       {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
       <div className='d-grid'>
       <input type="submit" value="Login" />
       </div>
       <p className='forgot-password text-right'>
+
         No account yet? <Link to="/register">Register here</Link>
       </p>
     </form>
