@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import './marketitem.css'
+import Card from 'react-bootstrap/Card';
+
 const Marketitem = (props) => {
   const { itemID } = useParams();
 
@@ -12,18 +14,20 @@ const Marketitem = (props) => {
   return (
     <div className='container'>
       <h1 >{Item.name}</h1>
-      <img className='image' src={Item.image} />
-
-      <div className='location'>
-
-
+       <Card style={{ width: '400px' }}>
+       <Card.Img variant="top" src={Item.image} />
+      <Card.Body>
+        <Card.Text>{Item.description}</Card.Text>
+        <Card.Text>Price: ${Item.price}</Card.Text>
+        <Card.Text>{Item.location}</Card.Text>
+        <div className="buttons">
+        <button class="button-55" onClick={() => {navigate(`/marketplace/${itemID}/edit`)}}  role="button">Edit</button>
+        <button class="button-55"   onClick={() => {props.handleDelete(itemID)}} role="button">Delete</button>
+        <button class="button-55"  onClick={() => { navigate('/marketplace') }} role="button">Go Back</button>
       </div>
-      <div >
-      <p className='description'>{Item.description}</p>
-      <p>Price: ${Item.price}</p>
-      <p>Deliverable:{Item.deliverable?'Yes':'No'}</p>
-      <p>{Item.location}</p>
-          <iframe className='iframe'
+
+      </Card.Body>
+      <iframe className='iframe'
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_GOOGLE_API}
               &q=${Item.location}&language=en`}
               width="400"
@@ -34,34 +38,7 @@ const Marketitem = (props) => {
               aria-hidden="false"
               tabIndex="0"
             />
-      </div>
-
-        <div className='buttons'>
-        <Button className='edit'
-          onClick={() => {
-            navigate(`/marketplace/${itemID}/edit`);
-          }}
-        >
-          Edit
-        </Button>
-        <Button className='delete'
-          onClick={() => {
-            props.handleDelete(itemID);
-          }}
-        >
-          Delete
-        </Button>
-
-
-      <Button className='back'
-          onClick={() => {
-            navigate('/marketplace')
-          }}
-        >
-          Go Back
-        </Button>
-        </div>
-
+    </Card>
     </div>
   );
 };
