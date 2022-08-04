@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const makeApiCall = async () => {
-    const url = "/marketplace";
+    const url = "/api/marketplace";
     const res = await fetch(url);
     const Marketplace = await res.json();
     setMarketplace(Marketplace);
@@ -47,7 +47,7 @@ function App() {
   }, []);
 
   const handleCreate = async (fields) => {
-    const url = "/marketplace";
+    const url = "/api/marketplace";
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -62,7 +62,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    const deleteURL = `/marketplace/${id}`;
+    const deleteURL = `/api/marketplace/${id}`;
     const res = await fetch(deleteURL, {
       method: "DELETE",
       header: `Content-Type: application/json`,
@@ -77,7 +77,7 @@ function App() {
   };
 
   const handleEdit = async (id, fields, index) => {
-    const editURL = `/marketplace/${id}`;
+    const editURL = `/api/marketplace/${id}`;
 
     const res = await fetch(editURL, {
       method: "PUT",
