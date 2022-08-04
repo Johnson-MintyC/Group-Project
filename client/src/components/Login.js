@@ -62,7 +62,7 @@ const Login = (props) => {
 
         <label htmlFor="password">Password</label>
         <br></br>
-        <input className="inputBox"
+        <input
           value={fields.password}
           onChange={handleChange}
           name="password"
@@ -73,7 +73,7 @@ const Login = (props) => {
         />
       </div>
 
-      {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
+      {warnning&&<p>{warnning}</p>}
       <div className='d-grid'>
       <input type="submit" value="Login" />
       </div>

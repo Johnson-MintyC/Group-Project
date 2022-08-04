@@ -47,7 +47,7 @@ const Register = (props) => {
 
         <label htmlFor="username">Username</label>
         <br></br>
-        <input className="inputBox"
+        <input
           value={fields.username}
           onChange={handleChange}
           placeholder='Username'
@@ -62,7 +62,7 @@ const Register = (props) => {
 
         <label htmlFor="password">Password</label>
         <br></br>
-        <input className="inputBox"
+        <input
           value={fields.password}
           onChange={handleChange}
           name="password"
@@ -73,7 +73,7 @@ const Register = (props) => {
         />
 
       </div>
-      {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
+      {warnning&&<p>{warnning}</p>}
       <div className='d-grid'>
       <input  type="submit" value="Register" />
       </div>
