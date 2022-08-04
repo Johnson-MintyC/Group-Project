@@ -11,6 +11,21 @@
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 600px) {
+    .container{
+        margin-top: 300px;
+    }
+}
+
+
+.iframe {
+  margin: 1rem auto;
+}
 
 /* CSS */
 .button-55 {
