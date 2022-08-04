@@ -26,7 +26,7 @@ const TheNavbar = (props) => {
     props.handleLogout();
   };
   return (
-    <Navbar bg="light" expand="lg"  >
+    <Navbar  expand="lg"  >
       <Container fluid>
         <Navbar.Brand href="/marketplace">Marketplace</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
