@@ -41,6 +41,7 @@ const NewItemForm = (props) => {
     setPhoto(event.target.files[0]);
   };
 
+  console.log(props.currentSessionUser);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (photo) {
@@ -56,7 +57,6 @@ const NewItemForm = (props) => {
       });
       const data = await res.json();
 
-      console.log(data.path);
       props.handleCreate({
         ...fields,
         image: data.path,
