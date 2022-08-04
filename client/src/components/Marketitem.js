@@ -31,35 +31,49 @@ const Marketitem = (props) => {
             <Card.Text>{Item.description}</Card.Text>
             <Card.Text>Price: ${Item.price}</Card.Text>
             <Card.Text>{Item.location}</Card.Text>
-            <div className="buttons">
-              <button
-                class="button-55"
-                onClick={() => {
-                  navigate(`/marketplace/${itemID}/edit`);
-                }}
-                role="button"
-              >
-                Edit
-              </button>
-              <button
-                class="button-55"
-                onClick={() => {
-                  props.handleDelete(itemID);
-                }}
-                role="button"
-              >
-                Delete
-              </button>
-              <button
-                class="button-55"
-                onClick={() => {
-                  navigate("/marketplace");
-                }}
-                role="button"
-              >
-                Go Back
-              </button>
-            </div>
+            {props.currentUser === Item.postowner ? (
+              <div className="buttons">
+                <button
+                  class="button-55"
+                  onClick={() => {
+                    navigate(`/marketplace/${itemID}/edit`);
+                  }}
+                  role="button"
+                >
+                  Edit
+                </button>
+                <button
+                  class="button-55"
+                  onClick={() => {
+                    props.handleDelete(itemID);
+                  }}
+                  role="button"
+                >
+                  Delete
+                </button>
+                <button
+                  class="button-55"
+                  onClick={() => {
+                    navigate("/marketplace");
+                  }}
+                  role="button"
+                >
+                  Go Back
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button
+                  class="button-55"
+                  onClick={() => {
+                    navigate("/marketplace");
+                  }}
+                  role="button"
+                >
+                  Go Back
+                </button>
+              </div>
+            )}
           </Card.Body>
           <iframe
             className="iframe"
