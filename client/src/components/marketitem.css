@@ -3,10 +3,18 @@
     justify-content: space-between;
 }
 
-.card{
-    margin: 0 auto;
+.card-img img{
+  border-radius: 0.375rem 0.375rem 0 0 !important
 }
 
+.row>* {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.iframe {
+  margin: 1rem auto;
+}
 
 /* CSS */
 .button-55 {

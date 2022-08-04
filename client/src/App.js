@@ -14,7 +14,7 @@ import "./App.css";
 function App() {
   const [marketplace, setMarketplace] = useState(null);
   const [authorised, setAuthorised] = useState(null);
-
+  const [currentUser, setCurrentUser] = useState();
   const navigate = useNavigate();
 
   const handleAuth = (authed) => {
@@ -26,10 +26,12 @@ function App() {
     navigate("/login");
   };
 
+  //on login, authority check
   useEffect(() => {
     const checkIfloggedIn = async () => {
       const res = await fetch("/users/isauthorised");
       const data = await res.json();
+      setCurrentUser(data);
       setAuthorised(data.authorised);
     };
     checkIfloggedIn();
@@ -155,10 +157,10 @@ function App() {
             path="/marketplace/:itemID"
             element={
               <ProtectedRoute authorised={authorised}>
-              <Marketitem
-                marketplace={marketplace}
-                handleDelete={handleDelete}
-              />
+                <Marketitem
+                  marketplace={marketplace}
+                  handleDelete={handleDelete}
+                />
               </ProtectedRoute>
             }
           />
@@ -167,10 +169,10 @@ function App() {
             path="/marketplace/:itemID/edit"
             element={
               <ProtectedRoute authorised={authorised}>
-              <MarketItemEdit
-                marketplace={marketplace}
-                handleEdit={handleEdit}
-              />
+                <MarketItemEdit
+                  marketplace={marketplace}
+                  handleEdit={handleEdit}
+                />
               </ProtectedRoute>
             }
           />
@@ -179,10 +181,7 @@ function App() {
             path="/marketplace/newitem"
             element={
               <ProtectedRoute authorised={authorised}>
-              <NewItemForm
-                handleCreate={handleCreate}
-              
-              />
+                <NewItemForm handleCreate={handleCreate} />
               </ProtectedRoute>
             }
           />
