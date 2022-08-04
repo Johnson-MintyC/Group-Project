@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
+
 const Login = (props) => {
+
   const navigate=useNavigate()
   const [fields, setFields] = useState({ username: "", password: "" });
  const [warnning,setWarnning]=useState(null)
@@ -27,13 +30,23 @@ const Login = (props) => {
 
     }
   };
+  const googleSuccess=(res)=>{
+    console.log(res)
+  }
+  const googleFailure=()=>{
+    console.log('Google Sign in was unsuccessful')
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
-      <div>
+    <div className="auth-wrapper">
+          <div className="auth-inner">
+    <form onSubmit={handleSubmit} >
+      <h3>Sign In</h3>
+      <div className='mb-3'>
         <label htmlFor="username">Username</label>
         <input
+          className='form-control'
+          placeholder='Username'
           value={fields.username}
           onChange={handleChange}
           name="username"
@@ -41,7 +54,7 @@ const Login = (props) => {
           id="username"
         />
       </div>
-      <div>
+      <div className='mb-3'>
         <label htmlFor="password">Password</label>
         <input
           value={fields.password}
@@ -49,15 +62,21 @@ const Login = (props) => {
           name="password"
           type="password"
           id="password"
+          className='form-control'
+          placeholder='Enter password'
         />
 
       </div>
-      <p>{warnning&&warnning}</p>
+      {warnning&&<Alert key={'danger'} variant={'danger'}>{warnning}</Alert>}
+      <div className='d-grid'>
       <input type="submit" value="Login" />
-      <p>
+      </div>
+      <p className='forgot-password text-right'>
         No account yet? <Link to="/register">Register here</Link>
       </p>
     </form>
+    </div>
+        </div>
   );
 };
 
