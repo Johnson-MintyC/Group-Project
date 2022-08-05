@@ -1,6 +1,6 @@
 # Group-Project
 
-Using the following as a [brief](https://git.generalassemb.ly/seir59anz/seir59anz-course-materials/tree/main/react/project), we as a group decided to create a secondhand market place as the theme and framing for the app.
+Using the following as a [brief](Brief.md), we as a group decided to create a secondhand market place as the theme and framing for the app.
 
 Try and Explore around
 [Marketplace](https://jbemarketplace.herokuapp.com/marketplace)
@@ -8,7 +8,9 @@ Try and Explore around
 Use these credentials to browse out app
 
 Sample account:
+</br>
 username : 1234
+</br>
 password : 1234
 
 ## Collaborators
@@ -37,6 +39,8 @@ password : 1234
   </br>
   ![](https://img.icons8.com/color/40/heroku.png)
 - Cloudinary
+  </br>
+  ![](https://pics.freeicons.io/uploads/icons/png/2182976911536207307-40.png)
 
 ## Features
 
