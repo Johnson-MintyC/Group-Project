@@ -1,6 +1,9 @@
 # Group-Project
 
-Using the following as a [brief](https://git.generalassemb.ly/seir59anz/seir59anz-course-materials/tree/main/react/project), we as a group decided to create a secondhand market place for as theme and idea.
+Using the following as a [brief](https://git.generalassemb.ly/seir59anz/seir59anz-course-materials/tree/main/react/project), we as a group decided to create a secondhand market place as the theme and framing for the app.
+
+Try and Explore around
+[Marketplace](https://jbemarketplace.herokuapp.com/marketplace)
 
 Use these credentials to browse out app
 
@@ -55,6 +58,6 @@ This app requires external api keys from the following
 
 The beginning wireframe for our app
 
-[Wireframe] (https://balsamiq.cloud/sf7g98b/p51djqu)
+[Wireframe](https://balsamiq.cloud/sf7g98b/p51djqu)
 
-![Screenshot1](./Screenshots/SS1.png)
+![Screenshot1](./screenshots/SS1.png)
