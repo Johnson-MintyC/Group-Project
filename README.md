@@ -54,9 +54,16 @@ This app requires external api keys from the following
 - Cloudinary
 - Mongo DB
 
+## Unresolved Issues
+
+Theres no way to contact the poster, potential sketch goal is a messaging system Route that can belong to the user,
+The CSS can be futher fine tuned, as theres mismatches in sizing
+
 ## Wireframe
 
-The beginning wireframe for our app
+We used Balsamiq as out wireframing tool
+
+click to see the drawing board beginnings for our app
 
 [Wireframe](https://balsamiq.cloud/sf7g98b/p51djqu)
 
